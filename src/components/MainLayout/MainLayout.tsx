@@ -10,7 +10,6 @@ const MainLayoutInner = ({ children }: Props) => {
     <div className='flex w-full'>
       <ChatList />
       <div className='grow'>
-        Chat Area
         {children}
         <Outlet />
       </div>

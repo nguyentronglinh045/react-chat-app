@@ -5,6 +5,7 @@ import path from './constants/path'
 import MainLayout from './components/MainLayout'
 
 const NotFound = lazy(() => import('./pages/NotFound'))
+const ChatArea = lazy(() => import('./components/ChatArea'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
@@ -59,7 +60,7 @@ export default function useRouteElement() {
               path: path.chatRoom,
               element: (
                 <Suspense fallback={<div>Loading</div>}>
-                  <div className=''>chat area</div>
+                  <ChatArea />
                 </Suspense>
               )
             }
