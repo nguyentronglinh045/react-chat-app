@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Outlet } from 'react-router-dom'
+import ChatList from '../ChatList'
 
 interface Props {
   children?: React.ReactNode
@@ -7,7 +8,7 @@ interface Props {
 const MainLayoutInner = ({ children }: Props) => {
   return (
     <div className='flex w-full'>
-      <div className='w-[360px] shrink-0'>ChatList</div>
+      <ChatList />
       <div className='grow'>
         Chat Area
         {children}
