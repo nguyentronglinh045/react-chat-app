@@ -1,20 +1,10 @@
-import { useState } from 'react'
+import ErrorBoundary from './components/ErrorBoundary'
+import useRouteElement from './useRouteElement'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const routeElements = useRouteElement()
 
-  return (
-    <div className='flex flex-col items-center justify-center'>
-      <h1>Vite + React</h1>
-      <div className='flex flex-col gap-2'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </div>
-  )
+  return <ErrorBoundary>{routeElements}</ErrorBoundary>
 }
 
 export default App
