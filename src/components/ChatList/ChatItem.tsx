@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import path from 'src/constants/path'
 
 interface ChatItemProps {
   isSelected?: boolean
@@ -15,9 +14,7 @@ export default function ChatItem({ isSelected, isGroup, isActive }: ChatItemProp
         isSelected ? 'bg-sky-100' : 'bg-white'
       } group relative rounded-lg`}
     >
-      <Link
-        to={path.user}
-        aria-hidden={true}
+      <button
         onClick={() => alert('Chat')}
         className='absolute right-5 hidden h-10 w-10 items-center justify-center rounded-full bg-white group-hover:flex'
       >
@@ -37,7 +34,7 @@ export default function ChatItem({ isSelected, isGroup, isActive }: ChatItemProp
           <circle cx={19} cy={12} r={1} />
           <circle cx={5} cy={12} r={1} />
         </svg>
-      </Link>
+      </button>
       {isGroup ? (
         <div className='flex h-14 w-14 max-w-[56px] flex-wrap items-center justify-center gap-1'>
           <img
@@ -66,10 +63,8 @@ export default function ChatItem({ isSelected, isGroup, isActive }: ChatItemProp
             alt='Cil Emely'
             className='h-14 w-14 rounded-full'
           />
-          {isActive ? (
+          {isActive && (
             <div className='absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-white bg-green-600 p-1'></div>
-          ) : (
-            ''
           )}
         </div>
       )}
