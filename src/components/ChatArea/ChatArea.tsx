@@ -7,9 +7,12 @@ export default function ChatArea() {
 
   return (
     <div className='flex h-full w-full grow flex-row'>
-      <div className='grow bg-white p-2'>
+      <div className='h-screen grow overflow-y-auto border bg-white p-2'>
         ChatArea {roomId}
-        <Message />
+        <Message isMyMessage={true} />
+        <Message isMyMessage={false} />
+        <Message isMyMessage={true} />
+        <Message isMyMessage={false} />
         <Message isMyMessage={true} />
         <Message isTyping={true} />
       </div>
