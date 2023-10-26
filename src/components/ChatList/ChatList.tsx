@@ -1,9 +1,9 @@
 import InputSearch from '../InputSearch'
-import ChatItem from './ChatItem'
+import ChatItem from '../ChatItem'
 
 export default function ChatList() {
   return (
-    <div className='flex w-[360px] flex-col bg-white pl-2'>
+    <div className='flex w-[360px] flex-col border-r bg-white pl-2'>
       <div className='flex h-[120px] flex-col justify-center gap-y-2 pr-4'>
         <div className='flex items-center justify-between'>
           <h2 className='text-2xl font-bold text-black'>Chat</h2>
@@ -54,7 +54,7 @@ export default function ChatList() {
         </div>
         <InputSearch />
       </div>
-      <div className='flex h-[calc(100vh-125px)] flex-col overflow-y-auto pb-4 pr-2'>
+      <div className='flex h-[calc(100vh-120px)] flex-col overflow-y-auto pb-4 pr-2'>
         <ChatItem isSelected={true} isActive={true} />
         <ChatItem isGroup={true} />
         <ChatItem isActive={true} />

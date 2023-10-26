@@ -27,8 +27,11 @@ module.exports = {
             boxShadow: '9992px 0 0 0 gray, 9999px 0 0 0 gray, 10006px 0 0 0 gray'
           }
         }
+      },
+      colors: {
+        'main-color': '#0084ff'
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }
