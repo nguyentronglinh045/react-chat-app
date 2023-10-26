@@ -5,6 +5,7 @@ import path from './constants/path'
 import MainLayout from './components/MainLayout'
 
 const NotFound = lazy(() => import('./pages/NotFound'))
+const Home = lazy(() => import('./pages/Home'))
 const ChatArea = lazy(() => import('./components/ChatArea'))
 
 function ProtectedRoute() {
@@ -23,6 +24,14 @@ export default function useRouteElement() {
       element: (
         <Suspense fallback={<div>Loading</div>}>
           <NotFound />
+        </Suspense>
+      )
+    },
+    {
+      path: '/',
+      element: (
+        <Suspense fallback={<div>Loading</div>}>
+          <Home />
         </Suspense>
       )
     },
