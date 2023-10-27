@@ -12,7 +12,7 @@ export default function NotFound() {
         <p className='my-12 text-lg text-gray-500 md:text-xl lg:text-2xl'>Trang không tồn tại</p>
         <Link
           to='/'
-          className='hover:border-main-color hover:text-main-color flex items-center space-x-2 rounded border px-6 py-4 font-bold text-gray-600 transition duration-150'
+          className='flex items-center space-x-2 rounded border px-6 py-4 font-bold text-gray-600 transition duration-150 hover:border-main-color hover:text-main-color'
           title='Return Home'
         >
           <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'>
