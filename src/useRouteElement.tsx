@@ -3,18 +3,21 @@ import { Navigate, Outlet, useRoutes } from 'react-router-dom'
 import { AppContext } from './contexts/app.context'
 import path from './constants/path'
 import MainLayout from './components/MainLayout'
+import Loading from './components/Loading'
 
 const NotFound = lazy(() => import('./pages/NotFound'))
 const Home = lazy(() => import('./pages/Home'))
 const ChatArea = lazy(() => import('./components/ChatArea'))
+const RegisterForm = lazy(() => import('./components/RegisterForm'))
+const LoginForm = lazy(() => import('./components/LoginForm'))
 
 function ProtectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
-  return isAuthenticated ? <Outlet /> : <Navigate to={path.login} />
+  return isAuthenticated ? <Outlet /> : <Navigate to={path.home} />
 }
 function RejectedRoute() {
   const { isAuthenticated } = useContext(AppContext)
-  return !isAuthenticated ? <Outlet /> : <Navigate to={path.home} />
+  return !isAuthenticated ? <Outlet /> : <Navigate to={path.chatRoom} />
 }
 
 export default function useRouteElement() {
@@ -22,16 +25,8 @@ export default function useRouteElement() {
     {
       path: '*',
       element: (
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={<Loading />}>
           <NotFound />
-        </Suspense>
-      )
-    },
-    {
-      path: '/',
-      element: (
-        <Suspense fallback={<div>Loading</div>}>
-          <Home />
         </Suspense>
       )
     },
@@ -40,20 +35,26 @@ export default function useRouteElement() {
       element: <RejectedRoute />,
       children: [
         {
-          path: path.login,
-          element: (
-            <Suspense fallback={<div>Loading</div>}>
-              <div className='h-8 w-full'>Login</div>
-            </Suspense>
-          )
-        },
-        {
-          path: path.register,
-          element: (
-            <Suspense fallback={<div>Loading</div>}>
-              <div className='h-8 w-full'>register</div>
-            </Suspense>
-          )
+          path: path.home,
+          element: <Home />,
+          children: [
+            {
+              path: path.home,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <LoginForm />
+                </Suspense>
+              )
+            },
+            {
+              path: path.register,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <RegisterForm />
+                </Suspense>
+              )
+            }
+          ]
         }
       ]
     },
@@ -68,7 +69,7 @@ export default function useRouteElement() {
             {
               path: path.chatRoom,
               element: (
-                <Suspense fallback={<div>Loading</div>}>
+                <Suspense fallback={<Loading />}>
                   <ChatArea />
                 </Suspense>
               )

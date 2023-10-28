@@ -1,14 +1,34 @@
 import { auth, githubAuthProvider } from 'src/firebase'
+import { useContext } from 'react'
+import { AppContext } from 'src/contexts/app.context'
+import { User } from 'src/types/user.type'
+import { setProfileToLS } from 'src/utils/auth'
 
 export default function LoginWithGithub() {
+  const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
+  console.log('isAuthenticated', isAuthenticated)
+  console.log('profile', profile)
+
   const handleLoginWithGithub = async () => {
     try {
-      const user = await auth.signInWithPopup(githubAuthProvider)
-      console.log('User logged in', user)
+      const { user } = await auth.signInWithPopup(githubAuthProvider)
+      setIsAuthenticated(true)
+      if (user) {
+        const userData: User = {
+          uid: user.uid || '',
+          email: user.email || '',
+          displayName: user.displayName || '',
+          photoURL: user.photoURL || '',
+          providerId: user.providerData[0]?.providerId || ''
+        }
+        setProfile(userData)
+        setProfileToLS(userData)
+      }
     } catch (error) {
-      console.error('Error signing in with Google', error)
+      console.error('Error signing in with Github', error)
     }
   }
+
   return (
     <button
       className='focus:shadow-outline mt-5 flex w-full max-w-xs items-center justify-center rounded-lg bg-indigo-100 py-3 

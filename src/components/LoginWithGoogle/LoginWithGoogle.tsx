@@ -1,11 +1,30 @@
+import { User } from 'src/types/user.type'
 import { auth, googleAuthProvider } from '../../firebase'
+import { useContext } from 'react'
+import { AppContext } from 'src/contexts/app.context'
+import { setProfileToLS } from 'src/utils/auth'
+
 export default function LoginWithGoogle() {
+  const { isAuthenticated, setIsAuthenticated, profile, setProfile } = useContext(AppContext)
+  console.log('isAuthenticated', isAuthenticated)
+  console.log('profile', profile)
   const handleLoginWithGoogle = async () => {
     try {
-      const user = await auth.signInWithPopup(googleAuthProvider)
-      console.log('User logged in', user)
+      const { user } = await auth.signInWithPopup(googleAuthProvider)
+      setIsAuthenticated(true)
+      if (user) {
+        const userData: User = {
+          uid: user.uid || '',
+          email: user.email || '',
+          displayName: user.displayName || '',
+          photoURL: user.photoURL || '',
+          providerId: user.providerData[0]?.providerId || ''
+        }
+        setProfile(userData)
+        setProfileToLS(userData)
+      }
     } catch (error) {
-      console.error('Error signing in with Google', error)
+      console.error('Error signing in with Github', error)
     }
   }
   return (
